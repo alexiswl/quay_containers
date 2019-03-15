@@ -105,7 +105,8 @@ def import_yaml(yaml_file):
     with open(yaml_file, 'r') as f:
         config_data = yaml.load(f)
     # Load as pandas dataframe
-    return pd.io.json.json_normalize(config_data)
+    df = pd.io.json.json_normalize(config_data)
+    return df
 
 
 def modify_template(yaml_item, template_file, app=None):
@@ -116,7 +117,7 @@ def modify_template(yaml_item, template_file, app=None):
 
             # Manually add SOFTWARE_UPPER
             if "__SOFTWARE_UPPER__" in line:
-                line = line.replace("__SOFTWARE_UPPER__", yaml_item["software"].upper())
+                line = line.replace("__SOFTWARE_UPPER__", yaml_item["software"].upper()).replace("-", "_")
             if "__BIND_PATHS_ARRAY__" in line:
                 line = line.replace("__BIND_PATHS_ARRAY__", "(%s)" % ' '.join("%s" % array
                                                                               for array in yaml_item['bind_paths']))
@@ -176,7 +177,7 @@ def main():
     # Iterate through each config and generate module, bash and singularity file
     for item in config_dfs:
         # Create subdirs for module, image and shell
-        software_subdirs = create_subdirs(os.path.join(args.output_dir, item.software, item.version), args)
+        software_subdirs = create_subdirs(os.path.join(args.output_dir, item.software, str(item.version)), args)
         # Copy and modify over module template
         if args.module_template is not None:
             # Set names
