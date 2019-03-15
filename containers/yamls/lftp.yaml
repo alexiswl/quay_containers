@@ -1,0 +1,18 @@
+- lftp_4.8.4:
+    clean_env: "1"
+    executable_name: lftp
+    runscript: |
+      exec lftp "${@}"
+    help: |
+      Run the lftp suite
+    software: lftp
+    bind_paths:
+      - /data
+      - /Databases
+    version: 4.8.4
+    labels: |
+      MAINTAINER Alexis Lucattini
+      VERSION 4.8.4
+      BUILD_DATE 15/03/2019
+    software_quay: lftp
+    version_quay: "4.8.4"

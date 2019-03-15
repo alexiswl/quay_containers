@@ -1,0 +1,19 @@
+- multiqc_1.7:
+    clean_env: "1"
+    executable_name: multiqc
+    runscript: |
+      exec multiqc "${@}"
+    help: |
+      Run the multiqc suite
+    software: multiqc
+    bind_paths:
+      - /data
+      - /Databases
+    version: "1.7"
+    labels: |
+      MAINTAINER Alexis Lucattini
+      VERSION 1.7
+      CONDA_VERSION 2
+      BUILD_DATE 15/03/2019
+    software_quay: multiqc
+    version_quay: 1.7--py_2

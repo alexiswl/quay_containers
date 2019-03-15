@@ -1,0 +1,19 @@
+- picard-tools_2.18.27:
+    clean_env: "1"
+    executable_name: picard
+    runscript: |
+      exec picard "${@}"
+    help: |
+      Run the picard software
+    software: picard-tools
+    bind_paths:
+      - /data
+      - /Databases
+    version: 2.18.27
+    labels: |
+      MAINTAINER Alexis Lucattini
+      VERSION
+      CONDA_VERSION 3
+      BUILD_DATE 13/03/2019
+    software_quay: picard
+    version_quay: 2.18.27--0

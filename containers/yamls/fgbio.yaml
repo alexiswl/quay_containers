@@ -1,0 +1,19 @@
+- fgbio_0.8.0:
+    clean_env: "1"
+    executable_name: fgbio
+    runscript: |
+      exec fgbio "${@}"
+    help: |
+      Run the fgbio suite
+    software: fgbio
+    bind_paths:
+      - /data
+      - /Databases
+    version: 0.8.0
+    labels: |
+      MAINTAINER Alexis Lucattini
+      VERSION 0.8.0
+      CONDA_VERSION 3
+      BUILD_DATE 13/03/2019
+    software_quay: fgbio
+    version_quay: 0.8.0--0
