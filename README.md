@@ -4,9 +4,22 @@ Installation of BioContainers through quay. Generate a module, bash wrapper reci
 [Overall Tutorial](https://alexiswl.github.io/presentations/HPC_and_Singularity/HPC_and_Singularity.html)  
 [Presentation](https://alexiswl.github.io/presentations/HPC_and_Singularity/HPC_Singularity_Presentation.html)
 
-# Troubleshooting
+## Guide to getting the right values in the yaml.
+1. Search for the software through [bioconda](https://bioconda.github.io/)
+2. Ensure that the container is 'container ready' as denoted by a light green symbol under the package name.
+3. Click on the 'tags' link that will direct you to the [quay.io](https://quay.io/repository/)
+4. Use the name of the quay repository for the software_quay item.
+5. Use the full name of the tag for the version_quay item
 
-## I get a warning complaining that /var/tmp is already mounted
+Example:
+I intend to install the star package.
+Searching star in bioconda leads me to [here](https://bioconda.github.io/recipes/star/README.html)
+I select [star/tags](https://quay.io/repository/biocontainers/star?tab=tags) to see the quay repo.
+I decide to install star version 2.7.0, so I specify `software_quay` as 'star' and `version_quay` as '2.7.0d--0'
+
+## Troubleshooting
+
+### I get a warning complaining that /var/tmp is already mounted
 This is likely due to /var/tmp existing during the installation of the job.
 `/var/tmp` links to `/tmp` at run-time so likely your `/var/tmp` during installation is also just a link to `/tmp`
 Append `rm /var/tmp` to the end of your %post script.
@@ -14,32 +27,9 @@ Append `rm /var/tmp` to the end of your %post script.
 Since `/tmp` is mounted to `/tmp` to build time
 This is the entire host's /tmp directory.
 
-## I get an error about locales not being able to be set.
+### I get an error about locales not being able to be set.
 If your container has been created with busybox, you're out of luck.
-Your best bet is too use the miniconda3 base and install the locales, then install through bioconda.
-See the picard example below.
+Your best bet is to use the bioconda singularity template.
+You'll need to rename the version_quay item in the yaml to the version in bioconda.
 
-
-```
-%files
-# Move to final spot during %post
-locale.gen /etc/locale.gen.tmp
-locale.alias /etc/locale.alias.tmp
-
-%post
-export PATH=/opt/conda/bin:$PATH
-# Install locales
-apt-get update
-apt-get install debconf locales -y
-dpkg-reconfigure locales
-# Move added files
-mv /etc/locale.gen.tmp /etc/locale.gen
-mv /etc/locale.alias.tmp /etc/locale.alias
-# Link to /usr/share/locale
-mkdir -p /usr/share/locale
-ln -sf /etc/locale.alias /usr/share/locale/locale.alias
-# Reset locales
-locale-gen
-# install picard
-conda install -c bioconda picard=2.18.27
-```
+See the picard 2.18.27 recipe for as an example.

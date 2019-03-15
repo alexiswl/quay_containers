@@ -53,7 +53,7 @@ def get_args():
                         help="Provide a module template")
     parser.add_argument("--bash-template", type=str, required=False, default=None,
                         help="Provide a bash template")
-    parser.add_argument("--singularity-template", type=str, required=False, default=None,
+    parser.add_argument("--singularity-template", type=str, required=True, default=None,
                         help="Provide a singularity template")
 
     return parser.parse_args()
