@@ -11,12 +11,13 @@ Installation of BioContainers through quay. Generate a module, bash wrapper reci
 4. Use the name of the quay repository for the software_quay item.
 5. Use the full name of the tag for the version_quay item
 
-Example:
-I intend to install the star package.
-Searching star in bioconda leads me to [here](https://bioconda.github.io/recipes/star/README.html)
-I select [star/tags](https://quay.io/repository/biocontainers/star?tab=tags) to see the quay repo.
-I decide to install star version 2.7.0, so I specify `software_quay` as 'star' and `version_quay` as '2.7.0d--0'
-I then run 
+**Example:**  
+I intend to install the star package.  
+Searching star in bioconda leads me to [here](https://bioconda.github.io/recipes/star/README.html)  
+I select [star/tags](https://quay.io/repository/biocontainers/star?tab=tags) to see the quay repo.  
+I decide to install star version 2.7.0,   
+so I specify `software_quay` as 'star' and `version_quay` as '2.7.0d--0'  
+I then run the following
 ```
 create_container_from_quay \
 --yaml yamls/star.yaml \
@@ -45,6 +46,16 @@ sudo singularity build $image $recipe
 done
 ```
 
+### I've built all my containers
+### I'm ready to move them to the specified container repo on my HPC
+Chances are, your module files want to go to your  `MODULEPATH` 
+so we'll leave them behind.
+```
+rsync --links --archive --prune-empty-dirs \
+      --include='*/' --exclude='module' \
+      --verbose
+      containers/ /path/to/containers/
+```
 
 ## Troubleshooting
 
