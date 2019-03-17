@@ -57,6 +57,20 @@ rsync --links --archive --prune-empty-dirs \
       containers/ /path/to/containers/
 ```
 
+
+### Copy across all my modules
+```
+for module in `find containers -type f -name module`; do
+# Get software 
+software=$(basename $(dirname $(dirname $(dirname ${module}))))
+# Get version
+version=$(basename $(dirname $(dirname ${module})))
+# Create software directory if it doesn't exist
+mkdir -p /path/to/modules/$software;
+# Copy module over to software 
+cp $module /path/to/modules/$software/$version
+done
+```
 ## Troubleshooting
 
 ### I get a warning complaining that /var/tmp is already mounted
