@@ -215,7 +215,7 @@ def main():
             modify_template(item, singularity_recipe)
             modify_singularity_template(item, singularity_recipe, app=None)
             # Log executable
-            logging.info("Now run 'sudo singularity build %s %s" % (singularity_image, singularity_recipe))
+            logging.info("Now run 'sudo singularity build %s %s'" % (singularity_image, singularity_recipe))
 
         # Iterate through apps
         if getattr(item, 'apps', None) is None:

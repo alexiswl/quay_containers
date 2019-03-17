@@ -10,7 +10,6 @@ export PATH
 additional_files/locale.gen /etc/locale.gen.tmp
 additional_files/locale.alias /etc/locale.alias.tmp
 
-
 %post
 export PATH=/opt/conda/bin:$PATH
 # Install locales
@@ -26,8 +25,7 @@ ln -sf /etc/locale.alias /usr/share/locale/locale.alias
 # Reset locales
 locale-gen
 # install picard
-conda install -c bioconda picard=2.18.27
-
+conda install -c bioconda picard=2.18.27--0 --yes
 %runscript
 exec picard "${@}"
 
@@ -35,7 +33,7 @@ exec picard "${@}"
 MAINTAINER Alexis Lucattini
 VERSION
 CONDA_VERSION 3
-BUILD_DATE 17/03/2019
+BUILD_DATE 13/03/2019
 
 %help
 Run the picard software
