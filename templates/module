@@ -24,7 +24,7 @@ proc ModulesHelp { } {
 conflict __SOFTWARE__
 
 # Set the apps directory
-set     CONTAINER_DIR           __CONTAINER_DIR__
+set     CONTAINER_DIR           /data/Bioinfo/bioinfo-resources/apps/singularity
 set     __SOFTWARE___CONTAINER_DIR        $CONTAINER_DIR/$software/$version
 
 # Prepend the path
