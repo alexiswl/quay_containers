@@ -1,0 +1,41 @@
+BootStrap: docker
+From: continuumio/miniconda3:latest
+
+%env
+PATH /opt/conda/bin:$PATH
+export PATH
+
+%files
+# Move to final spot during %post
+additional_files/locale.gen /etc/locale.gen.tmp
+additional_files/locale.alias /etc/locale.alias.tmp
+
+
+%post
+export PATH=/opt/conda/bin:$PATH
+# Install locales
+apt-get update
+apt-get install debconf locales -y
+dpkg-reconfigure locales
+# Move added files
+mv /etc/locale.gen.tmp /etc/locale.gen
+mv /etc/locale.alias.tmp /etc/locale.alias
+# Link to /usr/share/locale
+mkdir -p /usr/share/locale
+ln -sf /etc/locale.alias /usr/share/locale/locale.alias
+# Reset locales
+locale-gen
+# install lftp
+conda install -c conda-forge lftp=4.8.4
+
+%runscript
+exec lftp "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 4.8.4
+BUILD_DATE 15/03/2019
+
+%help
+Run the lftp suite
+

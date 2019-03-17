@@ -1,0 +1,15 @@
+Bootstrap: docker
+From: quay.io/biocontainers/fgbio:0.8.0--0
+
+%runscript
+exec fgbio "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 0.8.0
+CONDA_VERSION 3
+BUILD_DATE 13/03/2019
+
+%help
+Run the fgbio suite
+

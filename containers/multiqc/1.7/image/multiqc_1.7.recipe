@@ -1,0 +1,15 @@
+Bootstrap: docker
+From: quay.io/biocontainers/multiqc:1.7--py_2
+
+%runscript
+exec multiqc "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 1.7
+CONDA_VERSION 2
+BUILD_DATE 15/03/2019
+
+%help
+Run the multiqc suite
+
