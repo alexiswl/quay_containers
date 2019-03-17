@@ -248,5 +248,5 @@ def main():
                     modify_singularity_template(item, singularity_recipe, app=app, app_name=app_name)
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()

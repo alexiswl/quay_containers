@@ -7,11 +7,9 @@ export PATH
 
 %files
 # Move to final spot during %post
-locale.gen /etc/locale.gen.tmp
-locale.alias /etc/locale.alias.tmp
+additional_files/locale.gen /etc/locale.gen.tmp
+additional_files/locale.alias /etc/locale.alias.tmp
 
-%runscript
-exec picard "${@}"
 
 %post
 export PATH=/opt/conda/bin:$PATH
@@ -27,5 +25,5 @@ mkdir -p /usr/share/locale
 ln -sf /etc/locale.alias /usr/share/locale/locale.alias
 # Reset locales
 locale-gen
-# install picard
+# install __SOFTWARE_QUAY__
 conda install -c bioconda __SOFTWARE_QUAY__=__VERSION_QUAY__
