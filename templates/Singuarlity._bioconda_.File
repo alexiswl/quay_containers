@@ -10,7 +10,6 @@ export PATH
 additional_files/locale.gen /etc/locale.gen.tmp
 additional_files/locale.alias /etc/locale.alias.tmp
 
-
 %post
 export PATH=/opt/conda/bin:$PATH
 # Install locales
@@ -26,4 +25,4 @@ ln -sf /etc/locale.alias /usr/share/locale/locale.alias
 # Reset locales
 locale-gen
 # install __SOFTWARE_QUAY__
-conda install -c bioconda __SOFTWARE_QUAY__=__VERSION_QUAY__
+conda install -c bioconda __SOFTWARE_QUAY__=__VERSION_QUAY__ --yes
