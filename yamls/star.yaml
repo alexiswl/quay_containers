@@ -1,0 +1,27 @@
+ star_2.7.0:
+    executable_name: STAR
+    runscript: |
+      exec STAR "${@}"
+    help: |
+      Run the STAR aligner
+    software: star
+    bind_paths:
+      - /data
+      - /Databases
+    version: 2.7.0
+    labels: |
+      MAINTAINER Alexis Lucattini
+      VERSION 2.7.0b
+      CONDA_VERSION 3
+      BUILD_DATE 11/03/2019
+    software_quay: star
+    version_quay: 2.7.0b--0
+    clean_env: "1"
+    apps:
+      - longSTAR:
+          name: long
+          executable_name: STARlong
+          run: |
+            exec STARlong "${@}"
+          help: |
+            Run the STARlong version
