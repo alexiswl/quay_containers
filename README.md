@@ -17,6 +17,26 @@ Searching star in bioconda leads me to [here](https://bioconda.github.io/recipes
 I select [star/tags](https://quay.io/repository/biocontainers/star?tab=tags) to see the quay repo.
 I decide to install star version 2.7.0, so I specify `software_quay` as 'star' and `version_quay` as '2.7.0d--0'
 
+## Some extra shortcuts
+
+### Adding all your files to the git repo
+```
+for file in `find -L containers -type f -not -name '*.simg'`; do 
+git add $file;
+done
+```
+
+### Building all recipes concurrently
+```
+for recipe in `find containers -name '*.recipe'`; do
+# Get image
+image=${recipe%.recipe}.simg
+# Build image
+sudo singularity build $image $recipe
+done
+```
+
+
 ## Troubleshooting
 
 ### I get a warning complaining that /var/tmp is already mounted
