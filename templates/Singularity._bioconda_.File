@@ -26,3 +26,4 @@ ln -sf /etc/locale.alias /usr/share/locale/locale.alias
 locale-gen
 # install __SOFTWARE_QUAY__
 conda install -c bioconda __SOFTWARE_QUAY__=__VERSION_QUAY__ --yes
+
