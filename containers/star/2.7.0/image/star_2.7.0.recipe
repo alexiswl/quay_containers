@@ -1,0 +1,20 @@
+Bootstrap: docker
+From: quay.io/biocontainers/star:2.7.0b--0
+
+%runscript
+exec STAR "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 2.7.0b
+CONDA_VERSION 3
+BUILD_DATE 11/03/2019
+
+%help
+Run the STAR aligner
+
+%apprun longSTAR
+exec STARlong "${@}"
+
+%apphelp longSTAR
+Run the STARlong version
