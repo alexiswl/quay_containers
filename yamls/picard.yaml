@@ -16,4 +16,4 @@
       CONDA_VERSION 3
       BUILD_DATE 13/03/2019
     software_quay: picard
-    version_quay: 2.18.27--0
+    version_quay: 2.18.27
