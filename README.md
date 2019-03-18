@@ -23,7 +23,7 @@ create_container_from_quay \
 --yaml yamls/star.yaml \
 --output-dir containers \
 --module-template templates/module \
---bash-template templates/bash_wrapper.sh
+--bash-template templates/bash_wrapper.sh \
 --singularity-template templates/Singularity._quay_.File 
 ```
 
@@ -51,10 +51,11 @@ done
 Chances are, your module files want to go to your  `MODULEPATH` 
 so we'll leave them behind.
 ```
+HPC_CONTAINER_PATH=/path/to/containers
 rsync --links --archive --prune-empty-dirs \
       --include='*/' --exclude='module' \
-      --verbose
-      containers/ /path/to/containers/
+      --verbose \
+      containers/ ${HPC_CONTAINER_PATH}/
 ```
 
 ### Hard-code the CONTAINER_DIR environment variable for all my modules
@@ -64,24 +65,24 @@ To customise this to your HPC the following code should suffice.
 You may wish to also fork this repo and change the module template.  
 
 ```
-MY_CONTAINER_DIR=/path/to/containers
+HPC_CONTAINER_PATH=/path/to/containers
 for module in `find containers -type f -name module`; do
-sed -i "s%__CONTAINER_DIR__%${MY_CONTAINER_DIR}%g" ${module}
+sed -i "s%__CONTAINER_DIR__%${HPC_CONTAINER_PATH}%g" ${module}
 done
 ```
 
 ### Copy across all my modules
 ```
-MY_MODULESPATH=/path/to/modules
+HPC_MODULEPATH=/path/to/modules
 for module in `find containers -type f -name module`; do
 # Get software 
 software=$(basename $(dirname $(dirname $(dirname ${module}))))
 # Get version
 version=$(basename $(dirname $(dirname ${module})))
 # Create software directory if it doesn't exist
-mkdir -p /path/to/modules/$software
+mkdir -p ${HPC_MODULEPATH}/$software
 # Copy module over to software 
-cp $module ${MY_MODULESPATH}/$software/$version
+cp $module ${HPC_MODULEPATH}/$software/$version
 done
 ```
 
@@ -97,13 +98,18 @@ Append `rm /var/tmp` to the end of your %post script.
 **DO NOT** delete /tmp during post, do not use `rm -rf /var/tmp` as this will likely delete the contents inside `/tmp`.
 Since `/tmp` is mounted to `/tmp` to build time
 This is the entire host's /tmp directory.
+#### Example Case
+fgbio/0.8.0
 
 ### I get an error about locales not being able to be set.
 If your container has been created with busybox, you're out of luck.
+
+#### Solution
 Your best bet is to use the bioconda singularity template.
 You'll need to rename the version_quay item in the yaml to the version in bioconda 
 and use the Singularity._bioconda_.File template rather than the quay template.
 
+#### Example Case
 See the picard 2.18.27 recipe for as an example.
 
 ### Can I use a dry-run mode to see what's going on underneath.
