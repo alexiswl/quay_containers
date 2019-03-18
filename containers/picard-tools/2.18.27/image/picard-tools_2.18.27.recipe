@@ -25,7 +25,8 @@ ln -sf /etc/locale.alias /usr/share/locale/locale.alias
 # Reset locales
 locale-gen
 # install picard
-conda install -c bioconda picard=2.18.27--0 --yes
+conda install -c bioconda picard=2.18.27 --yes
+
 %runscript
 exec picard "${@}"
 
