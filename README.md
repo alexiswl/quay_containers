@@ -27,7 +27,7 @@ create_container_from_quay \
 --singularity-template templates/Singularity._quay_.File 
 ```
 
-## Some extra shortcuts
+## Some extra goodies
 
 ### Adding all your files to the git repo
 ```
@@ -57,20 +57,35 @@ rsync --links --archive --prune-empty-dirs \
       containers/ /path/to/containers/
 ```
 
+### Hard-code the CONTAINER_DIR environment variable for all my modules
+In each module template, the __CONTAINER_DIR__ variable component remains unset.  
+This way, modules are transferrable between HPC clusters and organisations.  
+To customise this to your HPC the following code should suffice.  
+You may wish to also fork this repo and change the module template.  
+
+```
+MY_CONTAINER_DIR=/path/to/containers
+for module in `find containers -type f -name module`; do
+sed -i "s%__CONTAINER_DIR__%${MY_CONTAINER_DIR}%g" ${module}
+done
+```
 
 ### Copy across all my modules
 ```
+MY_MODULESPATH=/path/to/modules
 for module in `find containers -type f -name module`; do
 # Get software 
 software=$(basename $(dirname $(dirname $(dirname ${module}))))
 # Get version
 version=$(basename $(dirname $(dirname ${module})))
 # Create software directory if it doesn't exist
-mkdir -p /path/to/modules/$software;
+mkdir -p /path/to/modules/$software
 # Copy module over to software 
-cp $module /path/to/modules/$software/$version
+cp $module ${MY_MODULESPATH}/$software/$version
 done
 ```
+
+
 ## Troubleshooting
 
 ### I get a warning complaining that /var/tmp is already mounted
@@ -90,3 +105,16 @@ You'll need to rename the version_quay item in the yaml to the version in biocon
 and use the Singularity._bioconda_.File template rather than the quay template.
 
 See the picard 2.18.27 recipe for as an example.
+
+### Can I use a dry-run mode to see what's going on underneath.
+Check out the help component of the module file.  
+You should see by specifying DRY_RUN_\<SOFTWARE\> to '1', that you can enter dry-run mode for a given software.  
+You can also see the environment that the software would be running in by setting the dry-run environment variable to 2.
+
+
+```
+# I want to see what STAR would run (but not actually run it)
+module load star
+export DRY_RUN_STAR=1
+STAR --help
+```
