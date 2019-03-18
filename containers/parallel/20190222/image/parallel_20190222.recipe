@@ -1,0 +1,17 @@
+BootStrap: docker
+From: alpine:20190228
+
+%post
+apk --no-cache add parallel=20190222-r0 bash=5.0.0-r0
+
+%runscript
+exec parallel "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 4.8.4
+BUILD_DATE 15/03/2019
+
+%help
+Run gnu parallel
+

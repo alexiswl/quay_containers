@@ -1,0 +1,15 @@
+Bootstrap: docker
+From: quay.io/biocontainers/lumpy-sv:0.2.14a--hdfb72b2_2
+
+%runscript
+exec lumpy "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 0.2.14
+CONDA_VERSION 3
+BUILD_DATE 18/03/2019
+
+%help
+Run lumpy-sv
+

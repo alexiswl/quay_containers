@@ -1,0 +1,15 @@
+Bootstrap: docker
+From: quay.io/biocontainers/sambamba:0.6.8--h89e63da_2
+
+%runscript
+exec sambamba "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 0.6.8
+CONDA_VERSION 3
+BUILD_DATE 18/03/2019
+
+%help
+Run sambamba
+

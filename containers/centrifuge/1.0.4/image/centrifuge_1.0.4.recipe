@@ -1,0 +1,15 @@
+Bootstrap: docker
+From: quay.io/biocontainers/centrifuge:1.0.4_beta--py35pl526he941832_2
+
+%runscript
+exec centrifuge "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 1.0.4
+CONDA_VERSION 3
+BUILD_DATE 18/03/2019
+
+%help
+Run the metagenomic aligner centrifuge
+
