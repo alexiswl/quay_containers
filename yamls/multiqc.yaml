@@ -10,6 +10,8 @@
       - /data
       - /Databases
     version: "1.7"
+    post: |
+      rm /etc/resolv.conf
     labels: |
       MAINTAINER Alexis Lucattini
       VERSION 1.7

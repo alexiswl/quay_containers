@@ -9,6 +9,9 @@
     bind_paths:
       - /data
       - /Databases
+    post: |
+      rm /etc/resolv.conf
+      rm /var/tmp
     version: 0.8.0
     labels: |
       MAINTAINER Alexis Lucattini

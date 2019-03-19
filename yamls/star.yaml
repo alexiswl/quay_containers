@@ -17,6 +17,8 @@
     software_quay: star
     version_quay: 2.7.0b--0
     clean_env: "1"
+    post: |
+     rm /var/tmp
     apps:
       - longSTAR:
           name: long
