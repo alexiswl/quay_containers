@@ -13,3 +13,115 @@ BUILD_DATE 18/03/2019
 %help
 Run lumpy-sv
 
+%apprun bamkit
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/bamkit "${@}"
+
+%apphelp bamkit
+Run bamkit from lumpy scripts
+
+%apprun extractSplitReads_BwaMem
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/extractSplitReads_BwaMem "${@}"
+
+%apphelp extractSplitReads_BwaMem
+Run extractSplitReads_BwaMem from lumpy scripts
+
+%apprun l_sort.py
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/l_sort.py "${@}"
+
+%apphelp l_sort.py
+Run l_sort.py from lumpy scripts
+
+%apprun split_unmapped_to_fasta.pl
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/split_unmapped_to_fasta.pl "${@}"
+
+%apphelp split_unmapped_to_fasta.pl
+Run split_unmapped_to_fasta.pl from lumpy scripts
+
+%apprun bedpe_sort.py
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/bedpe_sort.py "${@}"
+
+%apphelp bedpe_sort.py
+Run bedpe_sort.py from lumpy scripts
+
+%apprun get_coverages.py
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/get_coverages.py "${@}"
+
+%apphelp get_coverages.py
+Run get_coverages.py from lumpy scripts
+
+%apprun pairend_distro.py
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/pairend_distro.py "${@}"
+
+%apphelp pairend_distro.py
+Run pairend_distro.py from lumpy scripts
+
+%apprun vcfToBedpe
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/vcfToBedpe "${@}"
+
+%apphelp vcfToBedpe
+Run vcfToBedpe from lumpy scripts
+
+%apprun check_sorting.py
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/check_sorting.py "${@}"
+
+%apphelp check_sorting.py
+Run check_sorting.py from lumpy scripts
+
+%apprun get_exclude_regions.py
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/get_exclude_regions.py "${@}"
+
+%apphelp get_exclude_regions.py
+Run get_exclude_regions.py from lumpy scripts
+
+%apprun par-svtyper.sh
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/par-svtyper.sh "${@}"
+
+%apphelp par-svtyper.sh
+Run par-svtyper.sh from lumpy scripts
+
+%apprun cnvanator_to_bedpes.py
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/cnvanator_to_bedpes.py "${@}"
+
+%apphelp cnvanator_to_bedpes.py
+Run cnvanator_to_bedpes.py from lumpy scripts
+
+%apprun l_bp.py
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/l_bp.py "${@}"
+
+%apphelp l_bp.py
+Run l_bp.py from lumpy scripts
+
+%apprun prob_bedpe_to_bedgraph.py
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/prob_bedpe_to_bedgraph.py "${@}"
+
+%apphelp prob_bedpe_to_bedgraph.py
+Run prob_bedpe_to_bedgraph.py from lumpy scripts
+
+%apprun extract-sites.py
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/extract-sites.py "${@}"
+
+%apphelp extract-sites.py
+Run extract-sites.py from lumpy scripts
+
+%apprun l_merge.py
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/l_merge.py "${@}"
+
+%apphelp l_merge.py
+Run l_merge.py from lumpy scripts
+
+%apprun run_histo.sh
+exec /usr/local/share/lumpy-sv-0.2.14a-2/scripts/run_histo.sh "${@}"
+
+%apphelp run_histo.sh
+Run run_histo.sh from lumpy scripts
+
+%apprun lumpyexpress
+exec lumpyexpress "${@}"
+
+%apphelp lumpyexpress
+Run lumpyexpress
+%apprun lumpy_filter
+exec lumpy_filter "${@}"
+
+%apphelp lumpy_filter
+Run lumpy_filter

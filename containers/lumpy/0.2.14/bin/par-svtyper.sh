@@ -1,0 +1,1 @@
+../shell/par-svtyper.sh.sh
