@@ -101,7 +101,7 @@ version=$(basename $(dirname $(dirname ${module})))
 # Create software directory if it doesn't exist
 mkdir -p ${HPC_MODULEPATH}/$software
 # Copy module over to software 
-rsync --archive $module ${HPC_MODULEPATH}/$software/$version
+rsync --checksum $module ${HPC_MODULEPATH}/$software/$version
 done
 ```
 
