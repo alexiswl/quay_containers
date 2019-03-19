@@ -1,0 +1,15 @@
+Bootstrap: docker
+From: quay.io/biocontainers/samblaster:0.1.24--h2d50403_1
+
+%runscript
+exec samblaster "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 0.1.24
+CONDA_VERSION 3
+BUILD_DATE 19/03/2019
+
+%help
+Run the samblaster suite
+

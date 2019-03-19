@@ -1,9 +1,6 @@
 Bootstrap: docker
 From: quay.io/biocontainers/fgbio:0.8.0--0
 
-%post
-rm /var/tmp
-
 %runscript
 exec fgbio "${@}"
 
@@ -15,4 +12,7 @@ BUILD_DATE 13/03/2019
 
 %help
 Run the fgbio suite
+
+%post
+rm /etc/resolv.conf
 
