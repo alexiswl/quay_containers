@@ -1,17 +1,18 @@
 Bootstrap: docker
-From: quay.io/biocontainers/samblaster:0.1.24--h2d50403_1
+From: quay.io/biocontainers/svtyper:0.7.0--py27h24bf2e0_1
 
 %runscript
-exec samblaster "${@}"
+exec svtyper "${@}"
 
 %labels
 MAINTAINER Alexis Lucattini
-VERSION 0.1.24
+VERSION 0.7.0
 CONDA_VERSION 3
 BUILD_DATE 19/03/2019
 
 %help
-Run the samblaster suite
+Run the svtyper suite
 
 %post
 rm /var/tmp
+

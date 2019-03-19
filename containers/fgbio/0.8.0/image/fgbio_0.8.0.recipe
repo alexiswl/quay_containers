@@ -15,4 +15,5 @@ Run the fgbio suite
 
 %post
 rm /etc/resolv.conf
+rm /var/tmp
 

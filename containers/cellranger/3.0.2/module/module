@@ -1,0 +1,31 @@
+#%Module######################################################################
+#
+# cellranger 3.0.2 modulefile
+#
+
+# get software and version in 1
+set components [ file split [ module-info name ] ]
+
+set software [ lindex $components 0 ]
+set version [ lindex $components 1 ]
+
+# Get help
+proc ModulesHelp { } {
+  global version modroot
+  puts stderr "Sets up the paths you need to use centrifuge version $version."
+  puts stderr "Note this application uses singularity containers and aliases please ensure that: "
+  puts stderr "1. You own your own home directory"
+  puts stderr "2. Your data is in either of (/data /Databases)"
+  puts stderr "To use the DRY run mode, please run export DRY_RUN_CELLRANGER=1"
+  puts stderr "To use verbose dry run mode (which also prints the system environment, please use export DRY_RUN_CELLRANGER=2"
+}
+
+# Conflict with other centrifuge modules
+conflict cellranger
+
+# Set the apps directory
+set     CONTAINER_DIR           __CONTAINER_DIR__
+set     cellranger_CONTAINER_DIR        $CONTAINER_DIR/$software/$version
+
+# Prepend the path
+prepend-path PATH $cellranger_CONTAINER_DIR/bin

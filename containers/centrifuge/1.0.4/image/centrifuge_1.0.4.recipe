@@ -13,3 +13,5 @@ BUILD_DATE 18/03/2019
 %help
 Run the metagenomic aligner centrifuge
 
+%post
+rm /var/tmp
