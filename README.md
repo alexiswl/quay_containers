@@ -136,6 +136,13 @@ Check out the help component of the module file.
 You should see by specifying DRY_RUN_\<SOFTWARE\> to '1', that you can enter dry-run mode for a given software.  
 You can also see the environment that the software would be running in by setting the dry-run environment variable to 2.
 
+### I get this Java error complaining about an UnknownHostException
+
+#### Solution 
+The quay container has a rogue link to it's /etc/resolv.conf. By default Singularity will mount this at runtime from the host (so it doesn't need to exist). In this case you will need to remove the link during the %post script.
+
+#### Example case
+See the fgbio 0.8.0 recipe as an example.
 
 ```
 # I want to see what STAR would run (but not actually run it)
