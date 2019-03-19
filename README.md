@@ -27,8 +27,7 @@ create_container_from_quay \
 --singularity-template templates/Singularity._quay_.File 
 ```
 
-## Some extra goodies
-
+## Git Help
 ### Adding all your files to the git repo
 ```
 for file in `find -L containers -type f -not -name '*.simg'`; do 
@@ -43,6 +42,18 @@ for file in `find -L containers/${package_name} -type f -not -name '*.simg'`; do
 git add $file;
 done
 ```
+
+### Check what has been staged (added to git but not committed)
+```
+git diff --name-only --cached
+```
+
+### Check what has **not** been staged (not added to the git repo)
+```
+git diff --name-only
+```
+
+## Some extra goodies
 
 ### Building all recipes concurrently
 ```
