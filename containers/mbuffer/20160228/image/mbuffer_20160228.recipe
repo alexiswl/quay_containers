@@ -1,0 +1,19 @@
+Bootstrap: docker
+From: quay.io/biocontainers/mbuffer:20160228--1
+
+%runscript
+exec mbuffer "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 20160228
+CONDA_VERSION 3
+BUILD_DATE 13/03/2019
+
+%help
+Run the mbuffer suite
+
+%post
+rm /etc/resolv.conf
+rm /var/tmp
+
