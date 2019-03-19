@@ -25,7 +25,7 @@ conflict picard-tools
 
 # Set the apps directory
 set     CONTAINER_DIR           __CONTAINER_DIR__
-set     picard-tools_CONTAINER_DIR        $CONTAINER_DIR/$software/$version
+set     picard_tools_CONTAINER_DIR        $CONTAINER_DIR/$software/$version
 
 # Prepend the path
-prepend-path PATH $picard-tools_CONTAINER_DIR/bin
+prepend-path PATH $picard_tools_CONTAINER_DIR/bin
