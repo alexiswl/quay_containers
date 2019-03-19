@@ -36,6 +36,14 @@ git add $file;
 done
 ```
 
+### Adding just one of your software packages to the git repo
+```
+package_name='my_package'
+for file in `find -L containers/${package_name} -type f -not -name '*.simg'`; do 
+git add $file;
+done
+```
+
 ### Building all recipes concurrently
 ```
 for recipe in `find containers -name '*.recipe'`; do
