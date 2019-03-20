@@ -1,0 +1,19 @@
+Bootstrap: docker
+From: quay.io/biocontainers/pbccs:3.4.1--0
+
+%runscript
+exec ccs "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 3.4.1
+CONDA_VERSION 3
+BUILD_DATE 19/03/2019
+
+%help
+Run the ccs suite
+
+%post
+rm /var/tmp
+rm /etc/resolv.conf
+
