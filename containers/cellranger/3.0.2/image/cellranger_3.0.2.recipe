@@ -1,18 +1,19 @@
-Bootstrap: docker
-From: quay.io/biocontainers/cellranger:3.0.2
-
-%runscript
-exec cellranger "${@}"
-
-%labels
-MAINTAINER Alexis Lucattini
-VERSION 3.0.2
-CONDA_VERSION 2
-BUILD_DATE 15/03/2019
-
-%help
-Run the cellranger suite
+BootStrap: docker
+From: centos:centos7.6.1810
 
 %post
-rm /etc/resolv.conf
+yum update -y
 
+# Installation requirements
+yum install -y \
+  wget \
+  unzip 
+
+# Install bcl2fastq
+wget http://sapac.support.illumina.com/content/dam/illumina-support/documents/downloads/software/bcl2fastq/bcl2fastq2-v2-20-0-linux-x86-64.zip
+unzip bcl2fastq2-v2-20-0-linux-x86-64.zip
+yum install -y --nogpgcheck bcl2fastq2-v2.20.0.422-Linux-x86_64.rpm
+rm -f bcl2fastq2-v2-20-0-linux-x86-64.zip bcl2fastq2-v2.20.0.422-Linux-x86_64.rpm
+
+%runscript
+exec /opt/cellranger/cellranger "${@}"
