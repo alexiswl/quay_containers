@@ -1,0 +1,19 @@
+Bootstrap: docker
+From: quay.io/biocontainers/verifyBamID:1.1.3--hd28b015_2
+
+%runscript
+exec verifyBamID "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 1.1.3
+CONDA_VERSION 3
+BUILD_DATE 13/03/2019
+
+%help
+Run the verifyBamID suite
+
+%post
+rm /etc/resolv.conf
+rm /var/tmp
+
