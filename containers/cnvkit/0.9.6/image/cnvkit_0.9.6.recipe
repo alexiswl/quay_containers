@@ -1,0 +1,19 @@
+Bootstrap: docker
+From: quay.io/biocontainers/cnvkit:0.9.6a0--py36_2
+
+%runscript
+exec cnvkit "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 0.9.6
+CONDA_VERSION 3
+BUILD_DATE 19/03/2019
+
+%help
+Run the cnvkit suite
+
+%post
+rm /var/tmp
+rm /etc/resolv.conf
+
