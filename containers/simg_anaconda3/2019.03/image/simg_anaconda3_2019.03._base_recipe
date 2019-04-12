@@ -1,0 +1,18 @@
+BootStrap: docker
+From: continuumio/anaconda3:2019.03
+
+%runscript
+exec python3 "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION
+CONDA_VERSION 3
+BUILD_DATE 09/04/2019
+
+%help
+Run python3 through the anaconda image    
+
+%environment
+export PATH=/opt/conda/bin:$PATH
+

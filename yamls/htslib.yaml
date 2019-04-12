@@ -1,0 +1,44 @@
+- htslib_1.9:
+    clean_env: "1"
+    executable_name: htslib
+    runscript: |
+      exec htslib "${@}"
+    help: |
+      Run the htslib suite
+    software: htslib
+    bind_paths:
+      - /data
+      - /Databases
+    version: "1.9.7"
+    post: |
+        rm /var/tmp
+        rm /etc/resolv.conf
+    labels: |
+      MAINTAINER Alexis Lucattini
+      VERSION 1.9
+      CONDA_VERSION 3
+      BUILD_DATE 02/04/2019
+    software_quay: htslib
+    version_quay: 1.9--ha228f0b_7
+    apps:
+      - htsfile:
+          name: htsfile
+          executable_name: htsfile
+          run:
+            exec htsfile "${@}"
+          help: |
+            Run htsfile from htslib
+      - bgzip:
+          name: bgzip
+          executable_name: bgzip
+          run:
+            exec bgzip "${@}"
+          help: |
+            Run bgzip from htslib
+      - tabix:
+          name: tabix
+          executable_name: tabix
+          run:
+            exec tabix "${@}"
+          help: |
+            Run tabix from htslib

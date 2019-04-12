@@ -1,0 +1,44 @@
+BootStrap: docker
+From: continuumio/miniconda3:latest
+
+%env
+PATH /opt/conda/bin:$PATH
+export PATH
+
+%runscript
+exec /opt/vep/src/ensembl-vep/vep "$@"
+
+%help
+This is a singularity file for VEP singularity
+singularity run ensembl-vep -i ./inputfilename.vcf -o ./outputfilename --cache --assembly GRCh37 --dir_cache /opt/vep/.vep --dir_plugins /opt/vep/.plugins --offline --format vcf --vcf --symbol --plugin Downstream --plugin Wildtype --terms SO
+
+%environment
+LANGUAGE=en_US
+LANG="en_US.UTF-8"
+LC_ALL=C
+export LANGUAGE LANG LC_ALL
+
+%post
+mkdir -p /opt/vep/.vep;
+# install data for each of the genomes
+# Human hg19 and hg38
+perl /opt/vep/src/ensembl-vep/INSTALL.pl --AUTO acf --SPECIES homo_sapiens_refseq --ASSEMBLY GRCh37 --CACHEDIR /opt/vep/.vep
+perl /opt/vep/src/ensembl-vep/INSTALL.pl --AUTO acf --SPECIES homo_sapiens_refseq --ASSEMBLY GRCh38 --CACHEDIR /opt/vep/.vep
+# Mouse mm10 database
+perl /opt/vep/src/ensembl-vep/INSTALL.pl --AUTO acf --SPECIES mus_musculus_refseq --ASSEMBLY GRCm38 --CACHEDIR /opt/vep/.vep
+
+# get plugins
+#rm -fr /opt/vep/.plugins;
+mkdir -p /opt/vep/.plugins;
+
+rm -f -r /VEP_plugins;
+git clone https://github.com/Ensembl/VEP_plugins.git;
+cp -r -f /VEP_plugins/* /opt/vep/.plugins;
+rm -f -r /VEP_plugins;
+
+# get pVACseq plugin
+rm -f -r /pVAC-Seq;
+git clone https://github.com/griffithlab/pVAC-Seq.git;
+cp -f /pVAC-Seq/pvacseq/VEP_plugins/Wildtype.pm /opt/vep/.plugins;
+rm -f -r /pVAC-Seq;
+

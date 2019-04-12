@@ -1,0 +1,17 @@
+Bootstrap: docker
+From: willmclaren/ensembl-vep:release_95.3
+
+
+%help
+This is a singularity file for VEP singularity
+singularity run ensembl-vep -i ./inputfilename.vcf -o ./outputfilename --cache --assembly GRCh37 --dir_cache /opt/vep/.vep --dir_plugins /opt/vep/.plugins --offline --format vcf --vcf --symbol --plugin Downstream --plugin Wildtype --terms SO
+
+%environment
+LANGUAGE=en_US
+LANG="en_US.UTF-8"
+LC_ALL=C
+OPT_SRC=/opt/vep/src
+PERL5LIB=$OPT_SRC/ensembl-vep:$OPT_SRC/ensembl-vep/modules:$OPT_SRC/ensembl-vep:$OPT_SRC/ensembl-vep/modules:$OPT_SRC/bioperl-live
+HTSLIB_DIR=$OPT_SRC/htslib
+PATH=$OPT_SRC/ensembl-vep:$OPT_SRC/var_c_code:$PATH
+export LANGUAGE LANG LC_ALL PERL5LIB HTSLIB_DIR PATH

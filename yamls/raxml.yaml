@@ -1,0 +1,22 @@
+- raxml_8.2.12:
+    clean_env: "1"
+    executable_name: raxmlHPC
+    runscript: |
+      exec raxmlHPC "${@}"
+    help: |
+      Run the raxml suite
+    software: raxml
+    bind_paths:
+      - /data
+      - /Databases
+    version: "8.2.12"
+    post: |
+        rm /var/tmp
+        rm /etc/resolv.conf
+    labels: |
+      MAINTAINER Alexis Lucattini
+      VERSION 8.2.12
+      CONDA_VERSION 3
+      BUILD_DATE 25/03/2019
+    software_quay: raxml
+    version_quay: 8.2.12--h470a237_0

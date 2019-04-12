@@ -1,0 +1,22 @@
+- tabix_0.2.6:
+    clean_env: "1"
+    executable_name: tabix
+    runscript: |
+      exec tabix "${@}"
+    help: |
+      Run the tabix suite
+    software: tabix
+    bind_paths:
+      - /data
+      - /Databases
+    version: "0.2.6"
+    post: |
+        rm /var/tmp
+        rm /etc/resolv.conf
+    labels: |
+      MAINTAINER Alexis Lucattini
+      VERSION 0.2.6
+      CONDA_VERSION 3
+      BUILD_DATE 18/03/2019
+    software_quay: tabix
+    version_quay: 0.2.6--ha92aebf_0

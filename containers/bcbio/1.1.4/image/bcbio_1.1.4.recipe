@@ -1,0 +1,20 @@
+BootStrap: docker
+From: quay.io/biocontainers/bcbio-nextgen:1.1.4--py27_0
+
+%runscript
+exec bcbio_nextgen.py "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 1.1.4
+CONDA_VERSION 3
+BUILD_DATE 11/04/2019
+
+%help
+Run the bcbio suite
+
+#%post
+#bcbio_nextgen_install.py /usr/local/share/bcbio --tooldir=/usr/local \
+#  --genomes GRCh37 --genomes GRCh38 --genomes GRCm38 \
+#  --aligners bwa --aligners bowtie2 --aligners STAR
+

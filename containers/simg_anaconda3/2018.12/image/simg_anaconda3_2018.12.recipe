@@ -1,0 +1,101 @@
+Bootstrap: docker
+From: continuumio/anaconda3:2018.12
+
+%runscript
+exec python3 "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 1.9.0
+CONDA_VERSION 3
+BUILD_DATE 26/03/2019
+
+%help
+Run python3 through anaconda
+
+%files
+additional_files/locale.gen /etc/locale.gen.tmp
+additional_files/locale.alias /etc/locale.alias.tmp
+additional_files/install_jupyterlab.sh /install_jupyterlab.sh
+additional_files/install_slurm.sh /install_slurm.sh
+additional_files/slurm_shortcuts.tar.gz /slurm_shortcuts.tar.gz
+
+%post
+# Export as needed
+export PATH=/opt/conda/bin/:$PATH
+JUPYTERTAG=v1.0.0a1
+SLURM_COMMIT_ID=a438fa7
+
+# Install locales
+apt-get update
+apt-get install debconf locales -y
+dpkg-reconfigure locales
+# Move added files
+mv /etc/locale.gen.tmp /etc/locale.gen
+mv /etc/locale.alias.tmp /etc/locale.alias
+# Link to usr/local/share
+mkdir -p /usr/share/locale
+ln -sf /etc/locale.alias /usr/share/locale/locale.alias
+# Reset locales
+locale-gen
+
+# Install slurm
+/install_slurm.sh
+
+# Standard apps
+conda install -c anaconda --yes \
+  git=2.20.1 pip=19.0.1 python=3.7
+
+# Data science apps
+conda install -c anaconda --yes \
+  numpy=1.15.4 pandas=0.23.4 scikit-learn=0.20.1 \
+  matplotlib=3.0.2 bokeh=1.0.4 statsmodels=0.9.0 \
+  scipy=1.2.1
+
+# Bio Based apps
+conda install -c bioconda --yes \
+  pysam=0.15.2
+conda install -c conda-forge --yes \
+  biopython=1.73
+conda install -c etetoolkit --yes \
+  ete3=3.1.1
+
+# Install jupyter
+bash /install_jupyterlab.sh ${JUPYTERTAG}
+
+# Add in slurm shortcuts
+tar -xvf /slurm_shortcuts.tar.gz
+rm slurm_shortcuts.tar.gz
+cd slurm_shortcuts/slurm
+git checkout ${SLURM_COMMIT_ID}
+python setup.py install
+
+%apprun jupyter
+exec jupyter "${@}"
+
+%apphelp jupyter
+Run jupyter from container
+
+%appenv jupyter
+export PATH=/opt/conda/bin/:$PATH
+
+%apprun ipython
+exec ipython "${@}"
+
+%apphelp ipython
+Run ipython from container
+
+%appenv ipython
+export PATH=/opt/conda/bin/:$PATH
+
+%apprun python3
+exec python3 "${@}"
+
+%apprun python3.7
+exec python3.7 "${@}"
+
+%appenv python3
+export PATH=/opt/conda/bin/:$PATH
+
+%appenv python3.7
+export PATH=/opt/conda/bin/:$PATH

@@ -1,0 +1,111 @@
+BootStrap: docker
+From: continuumio/anaconda3:2019.03-alpine
+
+%runscript
+exec python3 "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION
+CONDA_VERSION 3
+BUILD_DATE 09/04/2019
+
+%help
+Run python3 through the anaconda image    
+
+%environment
+# Slurm
+export PATH=/usr/local/bin:$PATH
+# Conda
+export PATH=/opt/conda/bin:$PATH
+
+%post
+export PATH=/opt/conda/bin:$PATH
+# Export as needed
+#export PATH=/opt/conda/bin/:$PATH
+JUPYTERTAG=v1.0.0a1
+SLURM_COMMIT_ID=a438fa7
+
+# Update alpine
+apk update
+apk upgrade
+apk add bash=4.4.19-r1
+apk add rsync=3.1.3-r1
+apk add openssh=7.9_p1-r4
+
+# Install slurm
+/install_slurm.sh
+
+# Standard apps
+conda install -c anaconda --yes \
+  git=2.20.1 pip=19.0.3 python=3.7.3
+
+# Data science apps
+conda install -c anaconda --yes \
+  numpy=1.16.2 pandas=0.24.2 scikit-learn=0.20.3 \
+  matplotlib=3.0.3 bokeh=1.0.4 statsmodels=0.9.0 \
+  scipy=1.2.1 tabulate=0.8.3 paramiko=2.4.2
+
+# Bio Based apps
+conda install -c bioconda --yes \
+  pysam=0.15.2
+conda install -c conda-forge --yes \
+  biopython=1.73 humanfriendly=4.18 dask=0.19.2
+conda install -c etetoolkit --yes \
+  ete3=3.1.1
+
+# Install jupyter
+/install_jupyterlab.sh ${JUPYTERTAG}
+
+# Add in slurm shortcuts
+tar -xvf /slurm_shortcuts.tar.gz
+rm slurm_shortcuts.tar.gz
+cd slurm_shortcuts/slurm
+git checkout ${SLURM_COMMIT_ID}
+python setup.py install
+
+%files
+additional_files/install_jupyterlab.sh /install_jupyterlab.sh
+additional_files/install_slurm.sh /install_slurm.sh
+additional_files/slurm_shortcuts.tar.gz /slurm_shortcuts.tar.gz
+
+%apprun ipython
+exec ipython "${@}"
+
+%apphelp ipython
+Run ipython
+
+%appenv ipython
+export PATH=/usr/local/bin:$PATH
+export PATH=/opt/conda/bin:$PATH
+
+%apprun jupyter
+exec jupyter "${@}"
+
+%apphelp jupyter
+Run jupyter
+
+%appenv jupyter
+export PATH=/usr/local/bin:$PATH
+export PATH=/opt/conda/bin:$PATH
+
+%apprun conda
+exec conda "${@}"
+
+%apphelp conda
+Run conda command
+
+%appenv conda
+export PATH=/usr/local/bin:$PATH
+export PATH=/opt/conda/bin:$PATH
+
+%apprun python3.7
+exec python3.7 "${@}"
+
+%apphelp python3.7
+Run python3.7
+
+%appenv python3.7
+export PATH=/usr/local/bin:$PATH
+export PATH=/opt/conda/bin:$PATH
+

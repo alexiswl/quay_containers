@@ -1,0 +1,19 @@
+Bootstrap: docker
+From: quay.io/biocontainers/raxml:8.2.12--h470a237_0
+
+%runscript
+exec raxmlHPC "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 8.2.12
+CONDA_VERSION 3
+BUILD_DATE 25/03/2019
+
+%help
+Run the raxml suite
+
+%post
+rm /var/tmp
+rm /etc/resolv.conf
+

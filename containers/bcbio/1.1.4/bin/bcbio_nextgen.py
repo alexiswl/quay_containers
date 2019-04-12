@@ -1,0 +1,1 @@
+../shell/bcbio_nextgen.py.sh

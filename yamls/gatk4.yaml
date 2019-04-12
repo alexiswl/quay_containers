@@ -1,0 +1,20 @@
+- gatk4_4.1.0.0:
+    clean_env: "1"
+    executable_name: gatk
+    runscript: |
+      exec gatk "${@}"
+    help: |
+      Run the gatk4 suite
+    software: gatk
+    bind_paths:
+      - /data
+      - /Databases
+    version: "4.1.0.0"
+    post: |
+    labels: |
+      MAINTAINER Alexis Lucattini
+      VERSION 4.1.0.0
+      CONDA_VERSION 3
+      BUILD_DATE 25/03/2019
+    software_quay: gatk4
+    version_quay: 4.1.0.0-0

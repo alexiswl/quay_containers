@@ -1,0 +1,22 @@
+- raxml_ngs_8.2.12:
+    clean_env: "1"
+    executable_name: raxml-ng
+    runscript: |
+      exec /usr/local/bin/raxml-ng "${@}"
+    help: |
+      Run the raxml_ngs suite
+    software: raxml_ngs
+    bind_paths:
+      - /data
+      - /Databases
+    version: "0.8.0" 
+    post: |
+        rm /var/tmp
+        rm /etc/resolv.conf
+    labels: |
+      MAINTAINER Alexis Lucattini
+      VERSION 0.8.0
+      CONDA_VERSION 3
+      BUILD_DATE 02/04/2019
+    software_quay: raxml_ngs
+    version_quay: 0.8.0

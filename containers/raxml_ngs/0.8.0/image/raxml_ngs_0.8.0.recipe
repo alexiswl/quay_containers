@@ -1,0 +1,15 @@
+Bootstrap: docker
+From: evolbioinfo/raxml-ng:v0.8.0-beta
+
+%runscript
+exec /usr/local/bin/raxml-ng "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 0.8.0
+CONDA_VERSION 3
+BUILD_DATE 02/04/2019
+
+%help
+Run the raxml_ngs suite
+

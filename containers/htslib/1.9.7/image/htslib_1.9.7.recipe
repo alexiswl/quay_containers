@@ -1,0 +1,34 @@
+Bootstrap: docker
+From: quay.io/biocontainers/htslib:1.9--ha228f0b_7
+
+%runscript
+exec htslib "${@}"
+
+%labels
+MAINTAINER Alexis Lucattini
+VERSION 1.9
+CONDA_VERSION 3
+BUILD_DATE 02/04/2019
+
+%help
+Run the htslib suite
+
+%post
+rm /var/tmp
+rm /etc/resolv.conf
+
+%apprun htsfile
+exec htsfile "${@}"
+%apphelp htsfile
+Run htsfile from htslib
+
+%apprun bgzip
+exec bgzip "${@}"
+%apphelp bgzip
+Run bgzip from htslib
+
+%apprun tabix
+exec tabix "${@}"
+%apphelp tabix
+Run tabix from htslib
+
